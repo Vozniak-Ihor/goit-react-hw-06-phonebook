@@ -16,7 +16,7 @@
 }
 .searchInput {
   width: 588px;
-  height: 25px;
+  height: 30px;
   padding: 5px;
   border: 1px solid #ccc;
   border-radius: 4px;
@@ -24,9 +24,13 @@
 
 .deleteSvgIcon {
   position: absolute;
+  padding: 10px;
+
   right: 10px;
   top: calc(50% + 5px);
   transform: translateY(calc(-50% - 5px));
 }
 
-.deleteSvgIcon
+.deleteSvgIcon:hover{
+  cursor: pointer;
+}
