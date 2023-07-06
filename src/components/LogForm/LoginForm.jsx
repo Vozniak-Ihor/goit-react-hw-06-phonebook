@@ -1,22 +1,20 @@
 import * as yup from 'yup';
 import css from './LoginForm.module.css';
-import PropTypes from 'prop-types';
 import React from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { nanoid } from 'nanoid';
-import { useDispatch } from 'react-redux';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector} from 'react-redux';
 import { addContacts } from '../../redux/contactSlice/contactSlice';
-import { getContacts, getFilter } from 'redux/contactSlice/contactSelectors';
+import { getContacts } from 'redux/contactSlice/contactSelectors';
 
 const schema = yup.object().shape({
   name: yup.string().required("Ім'я обов'язкове"),
   phoneNumber: yup
     .string()
-    .matches(
-      /^(\+?3?8)?(0\d{9})$/,
-      'The number should look like this: +380XXXXXXXXX'
-    )
+    // .matches(
+    //   /^(\+?3?8)?(0\d{9})$/,
+    //   'The number should look like this: +380XXXXXXXXX'
+    // )
     .required("Номер телефону обов'язковий"),
 });
 
@@ -26,9 +24,9 @@ const initialValues = {
 };
 
 const LoginForm = () => {
-
   const storeContacts = useSelector(getContacts);
   const dispatch = useDispatch();
+
   const handleSubmit = (values, actions) => {
     const contactId = nanoid();
     if (storeContacts.some(item => item.name === values.name)) {
@@ -41,6 +39,7 @@ const LoginForm = () => {
       number: values.phoneNumber.toString(),
     };
     dispatch(addContacts(newContact));
+
     actions.resetForm();
   };
   return (
@@ -71,10 +70,4 @@ const LoginForm = () => {
 
 export default LoginForm;
 
-// LoginForm.propTypes = {
-//   onSubmit: PropTypes.func.isRequired,
-//   initialValues: PropTypes.exact({
-//     name: PropTypes.string.isRequired,
-//     phoneNumber: PropTypes.string.isRequired,
-//   }),
-// };
+
