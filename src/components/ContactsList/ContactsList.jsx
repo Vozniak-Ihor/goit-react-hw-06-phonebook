@@ -5,20 +5,20 @@ import { deleteContacts } from 'redux/contactSlice/contactSlice';
 import { getContacts } from 'redux/contactSlice/contactSelectors';
 import { getFilter } from 'redux/filterSlice/filterSelectors';
 
-
 const ContactsList = () => {
   const storeContacts = useSelector(getContacts);
   const storeFilter = useSelector(getFilter);
   const dispatch = useDispatch();
 
   const filteredContact = () => {
-    return storeContacts.filter(({ name }) => name.includes(storeFilter));
+    return storeContacts.contacts.filter(({ name }) => {
+      return name.includes(storeFilter);
+    });
   };
 
   const onDeleteContact = id => {
     dispatch(deleteContacts(id));
   };
-
   return filteredContact().map(({ id, name, number }) => {
     return (
       <ul className={css.contactList} key={id}>

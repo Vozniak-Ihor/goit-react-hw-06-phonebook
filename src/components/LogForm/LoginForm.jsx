@@ -29,7 +29,7 @@ const LoginForm = () => {
 
   const handleSubmit = (values, actions) => {
     const contactId = nanoid();
-    if (storeContacts.some(item => item.name === values.name)) {
+    if (storeContacts.contacts.some(item => item.name === values.name)) {
       alert(`${values.name} is already in contacts`);
       return;
     }
